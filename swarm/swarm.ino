@@ -1,15 +1,30 @@
 #include <Stepper.h>
-#define lStepP0=5;
-#define lStepP1=6;
-#define lStepP2=7;
-#define lStepP3=8;
-#define rStepP0=0;
-#define rStepP1=1;
-#define rStepP2=2;
-#define rStepP3=3;
 Stepper leftStepper(4096, lStepP0, lStepP1, lStepP2, lStepP3);
 Stepper rightStepper(4096, rStepP0, rStepP1, rStepP2, rStepP3);
 #define  TIMEOUT     4000    //Turns off steppers after 4 sec of inactivity.
+
+
+double ultraSonicGetVal()
+{
+   long duration, inches;
+
+   //turning on Sensor
+   pinMode(ultra1PinOut, OUTPUT);
+   digitalWrite(ultra1PinOut, LOW);
+   delayMicroseconds(2);
+   digitalWrite(ultra1PinOut, HIGH);
+   delayMicroseconds(10);
+   digitalWrite(ultra1PinOut, LOW);
+
+   pinMode(ultra1PinIN, INPUT);
+
+   duration = pulseIn(ultra1PinIN, HIGH);
+
+   inches = duration/74/2;
+
+   return inches;
+}
+
 void CheckTimeout(){
   if((millis() - timeStamp) > TIMEOUT){   //Turn Off StepperX coils.
     digitalWrite(lStepP0, LOW);

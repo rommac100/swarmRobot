@@ -12,4 +12,8 @@
 #define rStepP2 2;
 #define rStepP3 3;
 
+#define ultra1PinIN = 9;
+#define ultra12PinOut = 10;
+#define ultra2PinOut = 4;
+
 //Pins for ultrasonic Sensor
