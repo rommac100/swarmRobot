@@ -1,8 +1,9 @@
 #include <Stepper.h>
+#include "pins.h"
+#include <coord.c>
 Stepper leftStepper(4096, lStepP0, lStepP1, lStepP2, lStepP3);
 Stepper rightStepper(4096, rStepP0, rStepP1, rStepP2, rStepP3);
 #define  TIMEOUT     4000    //Turns off steppers after 4 sec of inactivity.
-
 
 double ultraSonicGetVal()
 {
@@ -64,4 +65,14 @@ double moveTurn(double angleTurn, double netAngle)
   }
   timeStamp = millis()
   return postNetAngle;
+}
+
+
+void init()
+{
+  setCurrentPosOrigin(0,ultraSonicGetVal);
+}
+void loop()
+{
+
 }
