@@ -54,7 +54,7 @@ if (angle > 0)
 
 void moveDir(double inches)
 {
-  if (inches > 0)
+  if (inches > 0)	
   {
        int steps = 0;
        while (steps < (int)inches*stepsPerInches)
