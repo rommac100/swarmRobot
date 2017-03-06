@@ -27,12 +27,37 @@ long ultraSonicGetVal()
    return inches;
 }
 
+void turn(int angle)
+{
+if (angle > 0)
+{
+  int steps = 0;
+  while (steps < angle/3*stepsPerInches)
+  {
+    motorLeft.step(-10);
+    motorRight.step(-10);
+    steps += 10;
+  }
+}
+  else if (angle < 0)
+  {
+    int steps = 0;
+    while (steps < angle/3*stepsPerInches)
+    {
+      motorLeft.step(10);
+      motorRight.step(10);
+      steps+= 10;
+    }
+  }
+}
+
+
 void moveDir(double inches)
 {
   if (inches > 0)
   {
        int steps = 0;
-       while (steps < inches*stepsPerInches)
+       while (steps < (int)inches*stepsPerInches)
        {
        motorLeft.step(-10);
        motorRight.step(10);
@@ -42,7 +67,7 @@ void moveDir(double inches)
   else if (inches < 0)
   {
     int steps = 0;
-    while (steps < inches*stepsPerInches)
+    while (steps < (int)inches*stepsPerInches)
     {
        motorLeft.step(10);
        motorRight.step(-10);
@@ -53,12 +78,13 @@ void moveDir(double inches)
 
 void setup(){
   Serial.begin(9600);
-  motorLeft.setStepDuration(3);
-  motorRight.setStepDuration(3);
+  motorLeft.setStepDuration(1);
+  motorRight.setStepDuration(1);
 }
 
 void loop(){
-moveDir(5);
+//moveDir(5);
+turn(90);
 delay(10000);
 /*
 while (ultraSonicGetVal() > 22)
